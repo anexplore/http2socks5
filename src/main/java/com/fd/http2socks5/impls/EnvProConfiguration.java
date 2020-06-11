@@ -19,7 +19,7 @@ public class EnvProConfiguration implements Configuration {
      */
     public static String getFromEnvOrPro(String key, String defaultValue) {
         String pro = System.getProperty(key);
-        if (Strings.isNullOrEmpty(key)) {
+        if (Strings.isNullOrEmpty(pro)) {
             pro = System.getenv(key);
         }
         return Strings.isNullOrEmpty(pro) ? defaultValue : pro;

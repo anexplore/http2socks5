@@ -7,9 +7,22 @@ mvn package
 ~~~
 This will create a jar with all dependencies in target/ dir
 
+build docker images
+~~~shell script
+docker build -t http2socks5:latest .
+~~~
+
 ##### 2. start
 ~~~shell
 java -Dsocks5ProxyHost=127.0.0.1 -Dsocks5ProxyPort=1080 -jar http2socks5-${version}-jar-with-dependencies.jar
+~~~
+or start a docker container
+~~~shell script
+docker run -d \
+  -e socks5ProxyHost=127.0.0.1 -e socks5ProxyPort=1080 \
+  -p 80:80 \
+  --name http2socks5 \
+  http2socks5:latest 
 ~~~
 
 This is will create adapter http server on (0.0.0.0:80), and will forward http request from client to socks5ProxyHost:socks5ProxyPort(127.0.0.1:1080) 
